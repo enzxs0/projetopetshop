@@ -1,0 +1,260 @@
+/* ============================================================
+   agenda.css — Grade semanal de agendamento (Seg–Sex, 08h–18h)
+   ============================================================ */
+
+.agenda-wrapper {
+  background: var(--cor-fundo-card);
+  border-radius: var(--raio-lg);
+  box-shadow: var(--sombra-md);
+  padding: var(--espaco-lg);
+  overflow: hidden;
+}
+
+/* Cabeçalho com serviço e semana */
+.agenda-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espaco-md);
+  flex-wrap: wrap;
+  margin-bottom: var(--espaco-lg);
+  padding-bottom: var(--espaco-md);
+  border-bottom: 2px solid var(--cor-borda);
+}
+.agenda-header__titulo {
+  font-size: 1.25rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-sm);
+}
+.agenda-header__titulo i { color: var(--cor-primaria); }
+
+.agenda-legenda {
+  display: flex;
+  gap: var(--espaco-md);
+  flex-wrap: wrap;
+  font-size: 0.85rem;
+}
+.agenda-legenda__item {
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-xs);
+}
+.agenda-legenda__dot {
+  width: 12px; height: 12px; border-radius: 3px;
+  display: inline-block;
+}
+.agenda-legenda__dot--livre { background: var(--cor-sucesso); }
+.agenda-legenda__dot--parcial { background: var(--cor-aviso); }
+.agenda-legenda__dot--lotado { background: var(--cor-erro); }
+.agenda-legenda__dot--passado { background: var(--cor-borda); }
+
+/* Grade */
+.agenda-grade {
+  display: grid;
+  grid-template-columns: 80px repeat(5, 1fr);
+  gap: 4px;
+  min-width: 700px;
+}
+
+.agenda-scroll {
+  overflow-x: auto;
+  padding-bottom: var(--espaco-sm);
+}
+
+.agenda-celula {
+  padding: var(--espaco-sm) var(--espaco-xs);
+  text-align: center;
+  font-size: 0.85rem;
+  border-radius: var(--raio-sm);
+  transition: all 0.2s;
+}
+
+/* Cabeçalho (dias) */
+.agenda-cabecalho {
+  background: var(--cor-primaria);
+  color: white;
+  font-weight: 700;
+  padding: var(--espaco-md) var(--espaco-sm);
+  font-size: 0.9rem;
+  border-radius: var(--raio-sm);
+}
+.agenda-cabecalho--hora {
+  background: var(--cor-primaria-escura);
+}
+
+/* Slot de horário */
+.agenda-slot {
+  background: var(--cor-fundo);
+  border: 1px solid var(--cor-borda);
+  cursor: pointer;
+  position: relative;
+  min-height: 52px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2px;
+  font-weight: 500;
+  transition: all 0.2s;
+}
+
+.agenda-slot:hover:not(.agenda-slot--bloqueado):not(.agenda-slot--selecionado) {
+  background: var(--cor-primaria-clara);
+  border-color: var(--cor-primaria);
+  transform: scale(1.02);
+}
+
+.agenda-slot--livre { background: #e8f3ea; border-color: #c8e0cc; }
+.agenda-slot--parcial { background: #fef4e0; border-color: #f0dca8; }
+.agenda-slot--lotado {
+  background: #fbe6e6;
+  border-color: #e8b0b0;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+.agenda-slot--passado {
+  background: #eee;
+  color: #999;
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.agenda-slot--bloqueado {
+  cursor: not-allowed;
+}
+.agenda-slot--selecionado {
+  background: var(--cor-primaria);
+  color: white;
+  border-color: var(--cor-primaria-escura);
+  box-shadow: 0 0 0 3px rgba(122,158,126,0.3);
+  transform: scale(1.05);
+}
+
+.agenda-slot__vagas {
+  font-size: 0.7rem;
+  font-weight: 700;
+  color: var(--cor-texto-suave);
+}
+.agenda-slot--selecionado .agenda-slot__vagas { color: rgba(255,255,255,0.9); }
+.agenda-slot--lotado .agenda-slot__vagas { color: var(--cor-erro); }
+
+.agenda-slot__check {
+  position: absolute;
+  top: 4px; right: 4px;
+  font-size: 0.7rem;
+  color: white;
+  background: var(--cor-sucesso);
+  border-radius: 50%;
+  width: 16px; height: 16px;
+  display: flex; align-items: center; justify-content: center;
+}
+
+/* Coluna de horários */
+.agenda-hora {
+  background: var(--cor-primaria-escura);
+  color: white;
+  font-weight: 700;
+  font-size: 0.85rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--raio-sm);
+  min-height: 52px;
+}
+
+/* Resumo / confirmação */
+.agenda-resumo {
+  margin-top: var(--espaco-lg);
+  padding: var(--espaco-lg);
+  background: var(--cor-fundo);
+  border-radius: var(--raio-md);
+  border-left: 4px solid var(--cor-primaria);
+  display: none;
+}
+.agenda-resumo--visivel { display: block; }
+.agenda-resumo__titulo {
+  font-weight: 700;
+  margin-bottom: var(--espaco-sm);
+  color: var(--cor-primaria-escura);
+}
+.agenda-resumo__info {
+  display: flex;
+  gap: var(--espaco-md);
+  flex-wrap: wrap;
+  font-size: 0.9rem;
+  margin-bottom: var(--espaco-md);
+}
+.agenda-resumo__info strong { color: var(--cor-texto); }
+
+/* Seletor mobile */
+.agenda-mobile {
+  display: none;
+}
+.agenda-mobile__dias {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  gap: var(--espaco-sm);
+  margin-bottom: var(--espaco-md);
+}
+.agenda-mobile__dia {
+  padding: var(--espaco-sm);
+  background: var(--cor-fundo);
+  border: 2px solid var(--cor-borda);
+  border-radius: var(--raio-md);
+  text-align: center;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+.agenda-mobile__dia:hover { border-color: var(--cor-primaria); }
+.agenda-mobile__dia--ativo {
+  background: var(--cor-primaria);
+  color: white;
+  border-color: var(--cor-primaria-escura);
+}
+.agenda-mobile__horarios {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  gap: var(--espaco-sm);
+}
+.agenda-mobile__slot {
+  padding: var(--espaco-md) var(--espaco-sm);
+  background: #e8f3ea;
+  border: 2px solid #c8e0cc;
+  border-radius: var(--raio-md);
+  text-align: center;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.2s;
+}
+.agenda-mobile__slot:hover:not(.agenda-slot--bloqueado) {
+  transform: translateY(-2px);
+  box-shadow: var(--sombra-md);
+}
+.agenda-mobile__slot--selecionado {
+  background: var(--cor-primaria);
+  color: white;
+  border-color: var(--cor-primaria-escura);
+}
+.agenda-mobile__slot--lotado,
+.agenda-mobile__slot--passado {
+  background: #eee;
+  color: #999;
+  border-color: #ddd;
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+.agenda-mobile__slot small {
+  display: block;
+  font-size: 0.75rem;
+  opacity: 0.85;
+  margin-top: 2px;
+}
+
+/* Responsivo */
+@media (max-width: 900px) {
+  .agenda-scroll { display: none; }
+  .agenda-mobile { display: block; }
+}

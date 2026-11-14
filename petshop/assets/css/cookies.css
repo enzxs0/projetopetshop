@@ -1,0 +1,149 @@
+/* ============================================================
+   cookies.css — Banner e modal de preferências de cookies
+   ============================================================ */
+
+/* Banner fixo inferior */
+.cookies-banner {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  background: var(--cor-fundo-card);
+  box-shadow: 0 -8px 24px rgba(0,0,0,0.15);
+  padding: var(--espaco-lg) var(--espaco-md);
+  z-index: 1500;
+  transform: translateY(100%);
+  transition: transform 0.4s ease;
+  border-top: 3px solid var(--cor-primaria);
+}
+.cookies-banner--visivel { transform: translateY(0); }
+
+.cookies-banner__container {
+  max-width: var(--container-max);
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  gap: var(--espaco-lg);
+  flex-wrap: wrap;
+}
+
+.cookies-banner__icone {
+  font-size: 2.5rem;
+  color: var(--cor-destaque);
+  flex-shrink: 0;
+}
+
+.cookies-banner__texto {
+  flex: 1;
+  min-width: 260px;
+}
+.cookies-banner__texto h3 {
+  font-size: 1.1rem;
+  margin-bottom: var(--espaco-xs);
+}
+.cookies-banner__texto p {
+  font-size: 0.9rem;
+  color: var(--cor-texto-suave);
+  margin-bottom: var(--espaco-xs);
+}
+.cookies-banner__texto a {
+  color: var(--cor-primaria-escura);
+  text-decoration: underline;
+  font-size: 0.9rem;
+}
+
+.cookies-banner__acoes {
+  display: flex;
+  gap: var(--espaco-sm);
+  flex-wrap: wrap;
+}
+
+/* Modal de preferências */
+.cookies-prefs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--espaco-md);
+  margin: var(--espaco-lg) 0;
+}
+
+.cookies-prefs__item {
+  border: 1px solid var(--cor-borda);
+  border-radius: var(--raio-md);
+  padding: var(--espaco-md);
+  background: var(--cor-fundo);
+  transition: border-color 0.2s;
+}
+.cookies-prefs__item:hover { border-color: var(--cor-primaria); }
+
+.cookies-prefs__cabecalho {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--espaco-md);
+  margin-bottom: var(--espaco-xs);
+}
+.cookies-prefs__titulo {
+  font-weight: 700;
+  font-size: 0.95rem;
+}
+.cookies-prefs__descricao {
+  font-size: 0.85rem;
+  color: var(--cor-texto-suave);
+}
+
+/* Toggle switch */
+.cookies-toggle {
+  position: relative;
+  display: inline-block;
+  width: 46px;
+  height: 26px;
+  flex-shrink: 0;
+}
+.cookies-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+.cookies-toggle__slider {
+  position: absolute;
+  cursor: pointer;
+  inset: 0;
+  background: #ccc;
+  border-radius: 26px;
+  transition: background 0.3s;
+}
+.cookies-toggle__slider::before {
+  content: '';
+  position: absolute;
+  height: 20px; width: 20px;
+  left: 3px; bottom: 3px;
+  background: white;
+  border-radius: 50%;
+  transition: transform 0.3s;
+}
+.cookies-toggle input:checked + .cookies-toggle__slider {
+  background: var(--cor-primaria);
+}
+.cookies-toggle input:checked + .cookies-toggle__slider::before {
+  transform: translateX(20px);
+}
+.cookies-toggle input:disabled + .cookies-toggle__slider {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Badge "Sempre ativo" */
+.cookies-badge {
+  font-size: 0.7rem;
+  font-weight: 700;
+  padding: 2px 8px;
+  background: var(--cor-primaria-clara);
+  color: var(--cor-texto);
+  border-radius: var(--raio-sm);
+  text-transform: uppercase;
+}
+
+/* Responsivo */
+@media (max-width: 640px) {
+  .cookies-banner__container { flex-direction: column; text-align: center; }
+  .cookies-banner__acoes { width: 100%; }
+  .cookies-banner__acoes .btn { flex: 1; }
+}
